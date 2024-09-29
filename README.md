@@ -1,11 +1,3 @@
-## Laravel For Absolute Beginners Course Level 2 Starter Repo
-
-
-
-
-
-This is the main readme file for the starter code used in laravel for absolute beginners course on Udemy (Level 2)
-
 ## Installation
 
 To get started, clone this repository.
