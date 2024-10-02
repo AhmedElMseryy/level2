@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,26 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', HomeController::class)->middleware(['throttle:watch_limiter'])->name('home');
+
+Route::fallback(function () {
     return view('welcome');
 });
+#=================================== Regular Expression Constraints
+// Route::get('/user/{name}', HomeController::class)->where('name', '[A-Za-z]+');
+// Route::get('/user/{id}', HomeController::class)->where('id', '[0-9]+');
+// Route::get('/user/{id}/{name}', HomeController::class)->where(['id' => '[0-9]+', 'name' => '[A-Za-z]+']);
+// Route::get('/user/{id}', HomeController::class)->whereNumber('id');
+// Route::get('/user/{name}', HomeController::class)->whereAlpha('name');
+// Route::get('/user/{name}', HomeController::class)->whereAlphaNumeric('name');
+// Route::get('/user/{category}', HomeController::class)->whereIn('category', ['movie', 'song', 'hair']);
 
+#=================================== Global Constraints
+// Route::get('/user/{id}', HomeController::class);
+// Route::get('/admin/{name}', HomeController::class);
+// Route::get('/merchant/{id}', HomeController::class);
 
+#-------------------------------------
 Route::prefix('dashboard')->group(function () {
 
     // ==================================== dashboard main page
@@ -27,7 +44,6 @@ Route::prefix('dashboard')->group(function () {
 
     // ============================================= products
     Route::resource('products', ProductController::class);
-
 });
 
 
@@ -39,3 +55,6 @@ Route::prefix('dashboard')->group(function () {
 // });
 
 // require __DIR__.'/auth.php';
+
+// require __DIR__ . '/admin.php';
+// require __DIR__ . '/merchant.php';
