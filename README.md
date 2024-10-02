@@ -1,12 +1,3 @@
-## Laravel For Absolute Beginners Course Level 2 Starter Repo
-
-<img src="https://img-b.udemycdn.com/course/750x422/5896146_26e7_2.jpg">
-
-**Created By :** Mahmoud Anwar
-**Email :** Engsahaly@gmail.com
-
-This is the main readme file for the starter code used in laravel for absolute beginners course on Udemy (Level 2)
-
 ## Installation
 
 To get started, clone this repository.
