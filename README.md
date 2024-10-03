@@ -3,7 +3,7 @@
 To get started, clone this repository.
 
 ```
-git clone https://github.com/engsahaly/laravel_course_level_2_starter_repo.git
+git clone https://github.com/AhmedElMseryy/level2.git
 ```
 
 Next, copy your `.env.example` file as `.env` and configure your Database connection.
