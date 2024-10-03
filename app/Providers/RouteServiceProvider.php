@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -31,6 +32,11 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('watch_limiter', function (Request $request) {
             return Limit::perMinute(3);
         });
+
+        // Route::bind('product', function (string $value) {
+        //     return Product::where('name', str_replace('-', ' ', $value))->firstOrFail();
+        // });
+
 
         $this->routes(function () {
             Route::middleware('api')

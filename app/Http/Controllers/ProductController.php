@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Support\Str;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(1);
+        $products = Product::paginate(10);
 
         return view('products.index', compact('products'));
     }
@@ -33,7 +34,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $productData = $request->validated();
-
+        // $productData['slug'] = Str::slug($productData['name'], '-');
         $product = Product::create($productData);
 
         return redirect()->route('products.index');
@@ -77,4 +78,8 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
 }
