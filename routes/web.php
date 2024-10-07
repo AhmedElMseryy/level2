@@ -17,7 +17,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', HomeController::class)->middleware(['throttle:watch_limiter'])->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::fallback(function () {
     return view('welcome');

@@ -1,0 +1,8 @@
+App\Models\Product::find(3)->update(['name'=>'Laptop Dell']);
+App\Models\Product::find(3)->update(['name'=>'Laptop Dell']);
+
+
+App\Models\Product::create([
+  'name' => 'Laptop Lenovo',
+  'price' => '550',
+]);
