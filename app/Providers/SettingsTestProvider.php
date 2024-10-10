@@ -22,16 +22,17 @@ class SettingsTestProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //sharing data with specific view
-        Facades\View::composer('welcome', function (View $view) {
-            $myName = "Ahmed Elmsery";
-            return $view->with('xx', $myName);
-        });
-    }
-}
-//sharing data with all views
+        //sharing data with all views
         // $settings = [
         //     'name' => 'company name',
         //     'address' => 'company address',
         // ];
         // View::share('settings', $settings);
+
+        //sharing data with specific view
+        // Facades\View::composer('welcome', function (View $view) {
+        //     $myName = "Ahmed Elmsery";
+        //     return $view->with('xx', $myName);
+        // });
+    }
+}
