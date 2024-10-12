@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 /*
@@ -37,18 +38,53 @@ Route::fallback(function () {
 // Route::get('/merchant/{id}', HomeController::class);
 
 #-------------------------------------
-Route::prefix('dashboard')->group(function () {
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale() . '/dashboard',
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
 
-    // ==================================== dashboard main page
-    // Route::view('/', 'dashboard')->name('dashboard')->withoutMiddleware('auth');
-    Route::view('/', 'dashboard')->middleware('test:elmsery,ahmed')->name('dashboard');
+        // ==================================== dashboard main page
+        // Route::view('/', 'dashboard')->name('dashboard')->withoutMiddleware('auth');
+        // Route::view('/', 'dashboard')->middleware('test:elmsery,ahmed')->name('dashboard');
+        Route::view('/', 'dashboard')->name('dashboard');
 
-    // ============================================= products
-    // Route::get('products/show/{product:slug}', [ProductController::class, 'show'])->name('products.show');
-    // Route::resource('products', ProductController::class)->except('show')->parameters(['products' => 'product:slug']);
-    Route::get('products/show/{product}', [ProductController::class, 'show'])->name('products.show');
-    Route::resource('products', ProductController::class)->except('show');
-});
+        // ============================================= products
+        // Route::get('products/show/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+        // Route::resource('products', ProductController::class)->except('show')->parameters(['products' => 'product:slug']);
+        Route::get('products/show/{product}', [ProductController::class, 'show'])->name('products.show');
+        Route::resource('products', ProductController::class)->except('show');
+    }
+);
+
+// Route::prefix('dashboard')->group(function () {
+
+//     // ==================================== dashboard main page
+//     // Route::view('/', 'dashboard')->name('dashboard')->withoutMiddleware('auth');
+//     // Route::view('/', 'dashboard')->middleware('test:elmsery,ahmed')->name('dashboard');
+//     Route::view('/', 'dashboard')->name('dashboard');
+
+//     // ============================================= products
+//     // Route::get('products/show/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+//     // Route::resource('products', ProductController::class)->except('show')->parameters(['products' => 'product:slug']);
+//     Route::get('products/show/{product}', [ProductController::class, 'show'])->name('products.show');
+//     Route::resource('products', ProductController::class)->except('show');
+// });
+
+// Route::prefix('{locale}/dashboard')->middleware('SetLocale')->group(function () {
+
+//     // ==================================== dashboard main page
+//     // Route::view('/', 'dashboard')->name('dashboard')->withoutMiddleware('auth');
+//     // Route::view('/', 'dashboard')->middleware('test:elmsery,ahmed')->name('dashboard');
+//     Route::view('/', 'dashboard')->name('dashboard');
+
+//     // ============================================= products
+//     // Route::get('products/show/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+//     // Route::resource('products', ProductController::class)->except('show')->parameters(['products' => 'product:slug']);
+//     Route::get('products/show/{product}', [ProductController::class, 'show'])->name('products.show');
+//     Route::resource('products', ProductController::class)->except('show');
+// })->where('locale', '[a-z](2)');
 
 
 
@@ -57,6 +93,8 @@ Route::prefix('dashboard')->group(function () {
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
+
 
 require __DIR__ . '/auth.php';
 
